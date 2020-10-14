@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To-do</title>
+</head>
+<body>
+    <h1>To-do list on Vue.js</h1>
+    <div id="app">
+        <input type="text" @keyup.enter="addTask" v-model="newTaskValue">
+        <ul>
+            <li v-for="task in tasks">
+                <input type="text" v-if="task.isEditing" @keyup.enter="editTask(task.id)" v-model="editValue">
+                <span v-else :class="{'completed': task.isCompleted}" @click="task.isCompleted = !task.isCompleted" >{{task.text}}</span>
+                <div class="controls">
+                    <button @click="removeTask(task.id)">Delete</button>
+                    <button @click="changeEditing(task.id,task.text)">Edit</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
